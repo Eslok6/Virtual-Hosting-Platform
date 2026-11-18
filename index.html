@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Syllabus: Metadata elements (Lec 1,2,3) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Event Hosting Platform - Project X</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Syllabus: Semantic Header (Unit 2) -->
+    <header id="site-header">
+        <div class="header-container">
+            <div>
+                <h1>Virtual Event Hosting Platform</h1>
+                <p><strong>Project X</strong> &bull; <mark>CSE326 Web Technologies</mark></p>
+            </div>
+            <!-- Logged-in User Status Bar -->
+            <div id="user-bar" class="user-bar" style="display: none;">
+                <span>User: <strong id="logged-user">Name</strong> | Role: <em id="logged-role">Role</em></span>
+                <button type="button" class="btn btn-sm btn-danger" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Syllabus: Semantic Navigation (Unit 2 & Lec 6) -->
+        <nav id="navbar" style="display: none;">
+            <ul>
+                <li><button class="nav-btn active" onclick="showTab('browse')">Browse Events</button></li>
+                <li id="host-nav-link"><button class="nav-btn" onclick="showTab('host')">Host New Event</button></li>
+                <li><button class="nav-btn" onclick="showTab('manage')">Manage &amp; Registrations</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Syllabus: Semantic Main container (Unit 2) -->
+    <main class="container">
+
+        <!-- ============================================== -->
+        <!-- 1. LOGIN SCREEN (Visible at startup)           -->
+        <!-- ============================================== -->
+        <section id="tab-login" class="tab-page">
+            <div class="login-card animated-card">
+                <h2>Platform Login</h2>
+                <p><small>Login as <strong>Joiner</strong> (Attendee) or <strong>Host</strong> (Organizer)</small></p>
+                <hr>
+
+                <form onsubmit="handleLogin(event)">
+                    <!-- Syllabus: Text input with required & placeholder (Unit 2) -->
+                    <div class="form-group">
+                        <label for="user-name">Full Name: <span class="req">*</span></label>
+                        <input type="text" id="user-name" placeholder="e.g. Rahul Sharma" required minlength="3">
+                    </div>
+
+                    <!-- Syllabus: Email input type (Unit 2 slide 66) -->
+                    <div class="form-group">
+                        <label for="user-email">Email Address: <span class="req">*</span></label>
+                        <input type="email" id="user-email" placeholder="student@university.edu" required>
+                    </div>
+
+                    <!-- Syllabus: Password input type (Unit 2 slide 65) -->
+                    <div class="form-group">
+                        <label for="user-pass">Password: <span class="req">*</span></label>
+                        <input type="password" id="user-pass" placeholder="Enter password (e.g. 1234)" required minlength="4">
+                    </div>
+
+                    <!-- Syllabus: Select & Option (Unit 2 slide 76) -->
+                    <div class="form-group">
+                        <label for="user-role">Select Role: <span class="req">*</span></label>
+                        <select id="user-role" required>
+                            <option value="Joiner" selected>Joiner (Browse &amp; Register Events)</option>
+                            <option value="Host">Host (Create &amp; Delete Events)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Login to Platform</button>
+                </form>
+
+                
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 2. BROWSE EVENTS TAB (Search + Grid Cards)     -->
+        <!-- ============================================== -->
+        <section id="tab-browse" class="tab-page" style="display: none;">
+            <div class="page-heading">
+                <h2>Browse Scheduled Events</h2>
+                <p>Search, filter, and register for virtual workshops.</p>
+            </div>
+
+            <!-- Search and Filter Controls -->
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search event by name..." onkeyup="filterEvents()">
+                <select id="filter-category" onchange="filterEvents()">
+                    <option value="All">All Categories</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Artificial Intelligence">Artificial Intelligence</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                </select>
+            </div>
+
+            <!-- Syllabus: CSS Grid container for cards (Unit 3) -->
+            <div id="events-grid" class="cards-grid">
+                <!-- Dynamically populated by script.js -->
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 3. HOST NEW EVENT TAB (HTML5 Form Controls)    -->
+        <!-- ============================================== -->
+        <section id="tab-host" class="tab-page" style="display: none;">
+            <div class="page-heading">
+                <h2>Host a New Virtual Event</h2>
+                <p>Fill out the form below to publish an upcoming session.</p>
+            </div>
+
+            <form class="styled-form" onsubmit="handleCreateEvent(event)">
+                <!-- Syllabus: fieldset and legend (Unit 2 slide 77) -->
+                <fieldset>
+                    <legend><strong>Event Information</strong></legend>
+
+                    <div class="form-group">
+                        <label for="event-title">Event Title: <span class="req">*</span></label>
+                        <input type="text" id="event-title" placeholder="e.g. Masterclass on HTML5 &amp; CSS" required minlength="4">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="event-category">Category: <span class="req">*</span></label>
+                            <select id="event-category" required>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Artificial Intelligence">Artificial Intelligence</option>
+                                <option value="Cyber Security">Cyber Security</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="event-host-name">Speaker / Host: <span class="req">*</span></label>
+                            <input type="text" id="event-host-name" placeholder="e.g. Prof. Rajveer Singh" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="event-date">Date: <span class="req">*</span></label>
+                            <input type="date" id="event-date" required>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="event-time">Time: <span class="req">*</span></label>
+                            <input type="time" id="event-time" required>
+                        </div>
+                        <!-- Syllabus: Number input with min, max, step (Unit 2 slide 67 & 97) -->
+                        <div class="form-group flex-1">
+                            <label for="event-seats">Total Seats: <span class="req">*</span></label>
+                            <input type="number" id="event-seats" min="10" max="200" step="5" value="50" required>
+                        </div>
+                    </div>
+
+                    <!-- Syllabus: Radio Buttons (Unit 2 slide 72) -->
+                    <div class="form-group">
+                        <label><strong>Event Access:</strong></label>
+                        <div class="inline-options">
+                            <label><input type="radio" name="event-access" value="Free" checked> Free Event (<del>&#8377;200</del> <ins>&#8377;0</ins>)</label>
+                            <label><input type="radio" name="event-access" value="Paid"> Sponsored Access</label>
+                        </div>
+                    </div>
+
+                    <!-- Syllabus: Checkboxes (Unit 2 slide 71) -->
+                    <div class="form-group">
+                        <label><strong>Attendee Perks:</strong></label>
+                        <div class="inline-options">
+                            <label><input type="checkbox" checked> E-Certificate</label>
+                            <label><input type="checkbox" checked> Video Recording</label>
+                        </div>
+                    </div>
+
+                    <!-- Syllabus: Textarea (Unit 2 slide 75) -->
+                    <div class="form-group">
+                        <label for="event-desc">Event Description: <span class="req">*</span></label>
+                        <textarea id="event-desc" rows="3" placeholder="Brief agenda of what students will learn..." required></textarea>
+                    </div>
+
+                    <!-- Syllabus: Submit & Reset Buttons (Unit 2 slide 74) -->
+                    <div class="btn-group">
+                        <input type="submit" value="Publish Event" class="btn btn-primary">
+                        <input type="reset" value="Clear Form" class="btn btn-secondary">
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 4. MANAGE & REGISTRATIONS (HTML Table)         -->
+        <!-- ============================================== -->
+        <section id="tab-manage" class="tab-page" style="display: none;">
+            <div class="page-heading">
+                <h2>Event Registry &amp; Management</h2>
+                <p>Complete data table representation of all events and registrations.</p>
+            </div>
+
+            <!-- Syllabus: Table, caption, thead, tbody, tfoot, th, td, colspan (Unit 2 slide 99-109) -->
+            <div class="table-container">
+                <table>
+                    <caption><strong>Virtual Events Master Registry Table</strong></caption>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Event Title</th>
+                            <th>Category</th>
+                            <th>Schedule</th>
+                            <th>Host</th>
+                            <th>Total Seats</th>
+                            <th>Registered</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" style="text-align: right;"><strong>Total Booked Seats:</strong></td>
+                            <td id="total-registrations-cell" colspan="3"><strong>0 Seats</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Syllabus: Semantic Footer (Unit 2) -->
+    <footer>
+        <p>&copy; 2026 Project X &bull; Leader: Eslok Singh (Reg: 12628260) &bull; CSE326 Web Technologies</p>
+    </footer>
+
+    <!-- JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
