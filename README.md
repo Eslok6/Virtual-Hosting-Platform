@@ -2,13 +2,14 @@
 **Course:** CSE326 - Web Technologies  
 **Section:** RR Section  
 **Team / Group Name:** Project X  
-**Assigned Leader in Sheet:** Eslok Singh (Reg. No: 12628260)  
+**Assigned Leader in Sheet:** Eslok Singh (Reg. No: 12628260) 
+**Team Members:** Kunwar Rajvir Singh(12614992), Ankit Kumar (12616086)
 **Project Objective:** Develop a role-based virtual event hosting platform that centralizes core records, user interactions, workflows, and status reporting.
 
 ---
 
 ## 🌟 Simple, Clean & Crisp Implementation
-This project is built strictly to match the syllabus taught in the first 2 months of **CSE326 Web Technologies** (HTML, CSS, and basic JavaScript). The code is kept short, clean, and beginner-friendly so that any student can easily explain it in a 10-15 minute teacher viva.
+This project is built strictly to match the syllabus taught in the first 2 months of **CSE326 Web Technologies** (HTML, CSS, and basic JavaScript). The code is kept short, clean, and beginner-friendly.
 
 ---
 
@@ -36,6 +37,6 @@ This project is built strictly to match the syllabus taught in the first 2 month
 ---
 
 ## 💻 Tech Stack
-- **HTML5:** Semantic tags (`header`, `nav`, `main`, `section`, `footer`), HTML Forms, and Data Table.
-- **CSS3:** Box Model, Flexbox, CSS Grid, Hover transitions, Buttons, and Table styles.
-- **Vanilla JavaScript:** Simple DOM manipulation (`document.getElementById()`, array operations, event listeners).
+- **HTML:** Semantic tags (`header`, `nav`, `main`, `section`, `footer`), HTML Forms, and Data Table.
+- **CSS:** Box Model, Flexbox, CSS Grid, Hover transitions, Buttons, and Table styles.
+- **JavaScript:** Simple DOM manipulation (`document.getElementById()`, array operations, event listeners).
