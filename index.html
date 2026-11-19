@@ -12,9 +12,9 @@
     <!-- Syllabus: Semantic Header (Unit 2) -->
     <header id="site-header">
         <div class="header-container">
-            <div>
-                <h1>Virtual Event Hosting Platform</h1>
-                <p><strong>Project X</strong> &bull; <mark>CSE326 Web Technologies</mark></p>
+            <div class="brand-box">
+                <h1 class="logo-text"><span class="logo-red">EVENT</span>SPHERE</h1>
+                <p><strong>Project X</strong> &bull; <mark class="theme-mark">CSE326 Web Technologies</mark></p>
             </div>
             <!-- Logged-in User Status Bar -->
             <div id="user-bar" class="user-bar" style="display: none;">
@@ -29,6 +29,7 @@
                 <li><button class="nav-btn active" onclick="showTab('browse')">Browse Events</button></li>
                 <li id="host-nav-link"><button class="nav-btn" onclick="showTab('host')">Host New Event</button></li>
                 <li><button class="nav-btn" onclick="showTab('manage')">Manage &amp; Registrations</button></li>
+                <li><button class="nav-btn" onclick="showTab('video')">Video Presentation</button></li>
             </ul>
         </nav>
     </header>
@@ -37,12 +38,12 @@
     <main class="container">
 
         <!-- ============================================== -->
-        <!-- 1. LOGIN SCREEN (Visible at startup)           -->
+        <!-- 1. LOGIN SCREEN (With Netflix Background Image) -->
         <!-- ============================================== -->
-        <section id="tab-login" class="tab-page">
+        <section id="tab-login" class="tab-page login-page-bg">
             <div class="login-card animated-card">
                 <h2>Platform Login</h2>
-                <p><small>Login as <strong>Joiner</strong> (Attendee) or <strong>Host</strong> (Organizer)</small></p>
+                <p class="login-sub"><small>Sign in as <strong>Joiner</strong> (Attendee) or <strong>Host</strong> (Organizer)</small></p>
                 <hr>
 
                 <form onsubmit="handleLogin(event)">
@@ -73,10 +74,10 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">Login to Platform</button>
+                    <button type="submit" class="btn btn-primary btn-block">Sign In to Platform</button>
                 </form>
 
-                
+               
             </div>
         </section>
 
@@ -225,6 +226,33 @@
                         </tr>
                     </tfoot>
                 </table>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- 5. VIDEO PRESENTATION & TUTORIAL SECTION       -->
+        <!-- ============================================== -->
+        <section id="tab-video" class="tab-page" style="display: none;">
+            <div class="page-heading">
+                <h2>Project Presentation &amp; Tutorial Video</h2>
+                <p>Demonstration walkthrough of the Virtual Event Hosting Platform as required by CSE326 Guidelines.</p>
+            </div>
+
+            <div class="video-card">
+                <!-- Syllabus: HTML5 Video Element with controls & source (Unit 2 slide 34) -->
+                <figure class="video-wrapper">
+                    <video controls width="100%" poster="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80">
+                        <source src="presentation.mp4" type="video/mp4">
+                        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+                        Your browser does not support HTML5 video tag.
+                    </video>
+                    <!-- Syllabus: Figcaption (Unit 2 slide 30) -->
+                    <figcaption>
+                        <strong>Project X Walkthrough Video</strong> &bull; Covers Project Motivation, Live Demo &amp; Code Architecture
+                    </figcaption>
+                </figure>
+
+               
             </div>
         </section>
 

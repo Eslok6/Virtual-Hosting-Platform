@@ -91,7 +91,7 @@ function logout() {
     showTab("login");
 }
 
-// 4. Tab Navigation (Browse, Host, Manage)
+// 4. Tab Navigation (Browse, Host, Manage, Video)
 function showTab(tabId) {
     let pages = document.querySelectorAll(".tab-page");
     pages.forEach(page => page.style.display = "none");
@@ -101,12 +101,13 @@ function showTab(tabId) {
 
     let targetPage = document.getElementById("tab-" + tabId);
     if (targetPage) {
-        targetPage.style.display = "block";
+        targetPage.style.display = tabId === "login" ? "flex" : "block";
     }
 
-    let navIndex = tabId === "browse" ? 0 : (tabId === "host" ? 1 : 2);
-    if (buttons[navIndex]) {
-        buttons[navIndex].classList.add("active");
+    // Map tabId to navigation button
+    let tabMap = { browse: 0, host: 1, manage: 2, video: 3 };
+    if (tabMap[tabId] !== undefined && buttons[tabMap[tabId]]) {
+        buttons[tabMap[tabId]].classList.add("active");
     }
 }
 
@@ -151,7 +152,7 @@ function renderEvents(customList = null) {
             <p><strong>Capacity:</strong> ${ev.registered} / ${ev.seats} seats ${isFull ? '<span class="status-full">(Full)</span>' : '<span class="status-open">(Available)</span>'}</p>
             <p>${ev.desc}</p>
             <div class="card-footer">
-                <span>${isBooked ? '<strong style="color: green;">&#10003; Registered</strong>' : ''}</span>
+                <span>${isBooked ? '<strong style="color: #22c55e;">&#10003; Registered</strong>' : ''}</span>
                 ${actionBtnCard}
             </div>
         `;
@@ -166,7 +167,7 @@ function renderEvents(customList = null) {
         } else {
             actionBtnTable = isBooked 
                 ? `<button type="button" class="btn btn-secondary btn-sm" onclick="toggleRegistration(${ev.id})">Cancel</button>`
-                : `<span style="color:#94a3b8;">-</span>`;
+                : `<span style="color:#777777;">-</span>`;
         }
 
         tr.innerHTML = `
