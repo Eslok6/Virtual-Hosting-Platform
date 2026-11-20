@@ -2,7 +2,7 @@
 **Course:** CSE326 - Web Technologies  
 **Section:** RR Section  
 **Team / Group Name:** Project X  
-**Assigned Leader in Sheet:** Eslok Singh (Reg. No: 12628260) 
+**Assigned Leader:** Eslok Singh (Reg. No: 12628260) 
 **Team Members:** Kunwar Rajvir Singh(12614992), Ankit Kumar (12616086)
 **Project Objective:** Develop a role-based virtual event hosting platform that centralizes core records, user interactions, workflows, and status reporting.
 
